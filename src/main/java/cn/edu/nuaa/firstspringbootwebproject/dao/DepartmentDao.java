@@ -12,9 +12,9 @@ public class DepartmentDao {
 
     static {
         departments=new HashMap<>();
-        departments.put(101,new Department(101,"a"));
-        departments.put(102,new Department(102,"b"));
-        departments.put(103,new Department(103,"c"));
+        departments.put(101,new Department(101,"Productions Development Department"));
+        departments.put(102,new Department(102,"Productions Marketing Department"));
+        departments.put(103,new Department(103,"Human Resource Department"));
     }
 
     public Collection<Department> findAllDepartment(){

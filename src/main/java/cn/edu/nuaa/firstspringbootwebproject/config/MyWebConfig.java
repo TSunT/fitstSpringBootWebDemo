@@ -20,7 +20,7 @@ import java.util.Locale;
 @Controller //在SpringBoot中会有非常多的扩展配置，只要看见了这个，我们就应该多留心注意
 public class MyWebConfig implements WebMvcConfigurer {
     //用于将自定义的视图解析器交给springboot
-    @Bean
+//    @Bean
     public ViewResolver myViewResolver(){
         return new MyViewResolver();
     }
@@ -43,12 +43,14 @@ public class MyWebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index.html").setViewName("index");
         registry.addViewController("/main").setViewName("dashboard");
+        registry.addViewController("/empList").setViewName("emp/list");
+        registry.addViewController("/addEmp").setViewName("emp/add");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandlerInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/","/login","/index.html","/dist/**","/login/loginUser");
+                .excludePathPatterns("/","/login","/index.html","/dist/**","/brand/**","/login/loginUser");
     }
 }

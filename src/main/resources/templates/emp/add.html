@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Dashboard Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/dist/css/bootstrap.min.css}" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/dist/css/dashboard.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="~{/commons/common::topbar}"></div>
+
+<div class="container-fluid">
+    <div class="row">
+<!--        边栏的抽取-->
+        <div th:insert="~{/commons/common::sidebar(action='emplist')}"></div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Employee List</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <a class="btn btn-sm btn-outline-secondary dropdown-toggle" th:href="@{/emp/addEmp}">
+                        Add Employee
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-form-label-lg">
+                <form method="post" th:action="@{/emp/insertEmp}">
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="inputEmail4">Employee</label>
+                            <input type="text" name="employeeName" class="form-control" id="inputEmail4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="0">
+                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="1">
+                            <label class="form-check-label" for="inlineRadio2">Fmale</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputDep">Department</label>
+                            <select id="inputDep" name="department.depId" class="form-control">
+                                <option th:each="dep:${departnemts}" th:text="${dep.getDepName()}" th:value="${dep.getDepId()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputBirth">Birth</label>
+                            <input type="date" class="form-control" name="birth" id="inputBirth">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Employee</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script th:src="@{/dist/js/vendor/jquery.slim.min.js}"><\/script>')</script><script th:src="@{/dist/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script th:src="@{/dist/js/dashboard.js}"></script></body>
+</body>
+</html>

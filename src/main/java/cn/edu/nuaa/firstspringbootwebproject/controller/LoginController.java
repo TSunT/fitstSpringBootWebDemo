@@ -19,10 +19,16 @@ public class LoginController {
                             HttpSession session){
         if (!StringUtils.isEmpty(username) && "1234".equals(password)){
             session.setAttribute("loginuser",username);
+            model.addAttribute("action","main");
             return "redirect:/main";
         }else {
             model.addAttribute("msg","用户密码错误");
             return "index";
         }
+    }
+    @RequestMapping("/logoutUser")
+    public String logoutUser(HttpSession session){
+        session.removeAttribute("loginuser");
+        return "index";
     }
 }
