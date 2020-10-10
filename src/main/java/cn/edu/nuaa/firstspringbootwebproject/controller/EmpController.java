@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/emp")
@@ -19,7 +21,6 @@ public class EmpController {
     @RequestMapping("/findAll")
     public String findAllEmp(Model model){
         model.addAttribute("employees",employeeDao.findAllEmployee());
-        System.out.println("findall==>"+employeeDao.findAllEmployee());
         return "emp/list";
     }
     @RequestMapping("/addEmp")
@@ -29,6 +30,17 @@ public class EmpController {
     }
     @PostMapping("/insertEmp")
     public String insertEmp(Employee employee){
+        employeeDao.saveEmployee(employee);
+        return "redirect:/emp/findAll";
+    }
+    @RequestMapping("/changeEmp")
+    public String changeEmp(@RequestParam Integer id, Model model){
+        model.addAttribute("emp",employeeDao.findById(id));
+        model.addAttribute("departnemts",departmentDao.findAllDepartment());
+        return "emp/edit";
+    }
+    @RequestMapping("/updateEmp")
+    public String updateEmp(Employee employee){
         employeeDao.saveEmployee(employee);
         return "redirect:/emp/findAll";
     }
